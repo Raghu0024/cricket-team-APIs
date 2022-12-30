@@ -32,7 +32,20 @@ app.get("/players/", async (request, response) => {
      * 
     FROM
     cricket_team
-    ORDER BY playerId;`;
+    ORDER BY player_id;`;
   const playersArray = await db.all(getAllPlayersQuery);
   response.send(playersArray);
+});
+
+//Create a Player
+app.post("/players/", async (request, response) => {
+  const { playerName, jerseyNumber, role } = request.body;
+  const createPlayerQuery = `
+    INSERT INTO 
+    cricket_team(playerName,jerseyNumber,role)
+    VALUES
+    (${playerName},${jerseyNumber},${role})
+    `;
+  const player = await db.run(createPlayerQuery);
+  response.send("Player Added to Team");
 });
