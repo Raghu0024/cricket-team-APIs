@@ -32,7 +32,7 @@ app.get("/players/", async (request, response) => {
      * 
     FROM
     cricket_team
-    ORDER BY playerId;`;
+    ORDER BY player_id;`;
   const playersArray = await db.all(getAllPlayersQuery);
   response.send(playersArray);
 });
